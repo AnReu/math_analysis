@@ -20,6 +20,15 @@ def tokenize(math):
         tokens.append(math[last_end:])
     return tokens
 
+def sort_tokens(part):
+    no_dollar = part.count('$')
+    if no_dollar > 0 and no_dollar %2 == 0:
+        tokens_no_dollar = part.replace('$', '')
+        tokens = sorted([t for t in tokenize(tokens_no_dollar) if t.strip() != ''])
+        tokens = ['$'] * (int(no_dollar/2)) + tokens + (['$'] * (int(no_dollar/2)))
+    else:
+        tokens = sorted([t for t in tokenize(part) if t.strip() != ''])
+    return tokens
 
 def sort_and_build(parts):
     output = ''
